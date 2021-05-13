@@ -37,6 +37,8 @@ ssize_t read_textfile(const char *filename, size_t letters)
 	while (!tokens)
 	{
 		op_code = tock_2(tokens[i]);
+		printf("%s", op_code[0]);
+		printf("%s", op_code[1]);
 	}
 
 	printf("%s\n", tokens[3]);
