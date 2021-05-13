@@ -47,6 +47,10 @@ char **tock_2(char *buff_arg);
 void (*funtions(char *words))(stack_t **stack, unsigned int line_number);
 void _push(stack_t **stack, unsigned int line_number);
 void _pall(stack_t **stack, __attribute__((unused))unsigned int line_number);
+void _pint(stack_t **stack, unsigned int line_number);
+void _pop(stack_t **stack, unsigned int line_number);
+void _swap(stack_t **stack, unsigned int line_number);
+void _add(stack_t **stack, unsigned int line_number);
 int free_dpointer(char **pointer);
 
 #endif
