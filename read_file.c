@@ -5,64 +5,85 @@
  * @letters: number of characters.
  * Return: characters prints.
  */
-ssize_t read_textfile(const char *filename, size_t letters)
+int read_textfile(const char *filename, size_t letters)
 {
-	int _open, _read, i;
-	char *ptr;
-	char **tokens, **op_code;
+    int _open, _read, i = 0;
+    char *ptr = NULL;
+    char **tokens = NULL, **arg = NULL;
 
-	if (filename == NULL)
-	{
-		return (0);
-	}
+    if (filename == NULL)
+    {
+        dprintf(2, "Error: Can't open file %s\n", filename);
+        exit(1);
+    }
 
-	ptr = malloc(sizeof(char) * letters);
-	if (ptr == NULL)
-	{
-		return (0);
-	}
-	_open = open(filename, O_RDONLY);
-	if (_open == -1)
-	{
-		free(ptr);
-		return (0);
-	}
-	_read = read(_open, ptr, letters);
-	if (_read == -1)
-	{
-		free(ptr);
-		return (0);
-	}
-	tokens = tock_arg(ptr);
-	while (!tokens)
-	{
-		op_code = tock_2(tokens[i]);
-		printf("%s", op_code[0]);
-		printf("%s", op_code[1]);
-	}
+    ptr = malloc(sizeof(char) * letters);
+    if (ptr == NULL)
+    {
+        return (0);
+    }
 
-	printf("%s\n", tokens[3]);
-	/*printf("%s\n", tokens[1]);*/
-	free(ptr);
-	close(_open);
-	return (0);
+    _open = open(filename, O_RDONLY);
+    if (_open == -1)
+    {
+        dprintf(2, "Error: Can't open file %s\n", filename);
+        free(ptr);
+        exit(1);
+    }
+    _read = read(_open, ptr, letters);
+    if (_read == -1 || _read == 0)
+    {
+        dprintf(2, "Error: Can't open file %s\n", filename);
+        exit(1);
+    }
+    tokens = tock_arg(ptr);
+
+	while (tokens[i] != NULL)
+	{
+        printf("%s tokens \n", tokens[i]);
+		arg = tock_2(tokens[i]);
+        valor = arg[1];
+        if (arg == NULL)
+        {
+            perror ("No hay argumentos");
+            i++;
+            continue;
+        }
+        /*if (arg != NULL)
+        {
+            printf("%s Seg token pos 0\n", arg[0]);
+        }*/
+		free_dpointer(arg);
+		i++;
+	}
+    /*printf("%s\n", tokens[1]);*/
+	free_dpointer(tokens);
+    free(ptr);
+    close(_open);
+    return (0);
 }
+
 /**
  * tock_arg - tokenizar line of argument.
  * @buff_arg: line of argument.
  * Return: return char double pointer of tokens.
  */
+
 char **tock_arg(char *buff_arg)
 {
     int number_arg = 0, pos = 0;
     char **arg_token = NULL;
 
-    number_arg = count_w(buff_arg);
+    number_arg = count_2(buff_arg,"\n");
     arg_token = malloc(sizeof(char *) * (number_arg + 1));
-
+	if (!arg_token)
+	{
+		return (NULL);
+	}
+	
     arg_token[pos] = strdup(strtok(buff_arg, "\n"));
     pos++;
-    while (pos < number_arg - 1)
+    while (pos < number_arg)
     {
         arg_token[pos] = strdup(strtok(NULL, "\n"));
         pos++;
@@ -70,72 +91,37 @@ char **tock_arg(char *buff_arg)
     arg_token[pos] = NULL;
     return (arg_token);
 }
-/**
- * tock_arg - tokenizar line of argument.
- * @buff_arg: line of argument.
- * Return: return char double pointer of tokens.
- */
-char **tock_2(char *buff_arg)
-{
-    int number_arg = 0, pos = 0;
-    char **arg_token = NULL;
 
-    number_arg = count_2(buff_arg);
-    arg_token = malloc(sizeof(char *) * (number_arg + 1));
-
-    arg_token[pos] = strdup(strtok(buff_arg, " \t"));
-    pos++;
-    while (pos < number_arg - 1)
-    {
-        arg_token[pos] = strdup(strtok(NULL, " \t"));
-        pos++;
-    }
-    arg_token[pos] = NULL;
-    return (arg_token);
-}
 /**
  * count_w - Function that counts the words writed in terminal
  * @buff: to temporarily store the words
  * Return: the number of words
  */
+
 int count_w(char *buff)
 {
-	int step = 0, i = 0;
-	unsigned int words = 0;
+    int words = 0;
+	int i = 0;
 
-	while (buff[i])
-	{
-		if (buff[i] == '\n')
-			step = 0;
-		else if (step == 0)
-		{
-			step = 1;
-			words++;
-		}
-		i++;
-	}
-	return (words);
+    while (buff[i])
+    {
+        if (buff[i] == '\n')
+            words++;
+        i++;
+    }
+    printf("%d este es words\n", words);
+    return (words);
 }
-/**
- * count_w - Function that counts the words writed in terminal
- * @buff: to temporarily store the words
- * Return: the number of words
- */
-int count_2(char *buff)
-{
-	int step = 0, i = 0;
-	unsigned int words = 0;
 
-	while (buff[i])
+int free_dpointer(char **pointer)
+{
+	int i = 0;
+
+	while (pointer[i] != NULL)
 	{
-		if (buff[i] == ' ')
-			step = 0;
-		else if (step == 0)
-		{
-			step = 1;
-			words++;
-		}
+		free(pointer[i]);
 		i++;
 	}
-	return (words);
+	free(pointer);
+    return(0);
 }
