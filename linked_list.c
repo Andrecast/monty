@@ -11,11 +11,11 @@ void _push(stack_t **stack, unsigned int line_number)
 	stack_t *new;
 
 	if (stack == NULL)/*si el doble puntero es NULL, no hay nada*/
-		return (NULL);
+		exit(1);
 	new = malloc(sizeof(stack_t));
 	/*verificar malloc**/
 	if (new == NULL)
-		return (NULL);
+		exit(1);
 	new->prev = NULL;/*le asigno NULL porq va a ser el nuevo nodo*/
 	new->n = line_number;/*le asigno el número que va a llevar*/
 
@@ -26,7 +26,6 @@ void _push(stack_t **stack, unsigned int line_number)
 		(*stack)->prev = new;/*Ahora new está al inicio de la lista*/
 
 	*stack = new;
-	return (new);
 }
 
 /**
