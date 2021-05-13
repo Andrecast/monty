@@ -18,7 +18,7 @@
  * Description: doubly linked list node structure
  * for stack, queues, LIFO, FIFO Holberton project
  */
-extern char valor; 
+extern char *valor; 
 typedef struct stack_s
 {
         int n;
