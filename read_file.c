@@ -43,8 +43,7 @@ ssize_t read_textfile(const char *filename, size_t letters)
 	/*printf("%s\n", tokens[1]);*/
 	free(ptr);
 	close(_open);
-
-	return (_write);
+	return (0);
 }
 /**
  * tock_arg - tokenizar line of argument.

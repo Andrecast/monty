@@ -40,5 +40,8 @@ typedef struct instruction_s
 ssize_t read_textfile(const char *filename, size_t letters);
 char **tock_arg(char *buff_arg);
 int count_w(char *buff);
-void (*funtions(*words)(stack_t **stack, unsigned int line_number))
+void (*funtions(char *words))(stack_t **stack, unsigned int line_number);
+void _push(stack_t **stack, unsigned int line_number);
+void _pall(stack_t **stack, __attribute__((unused))unsigned int line_number);
+
 #endif
