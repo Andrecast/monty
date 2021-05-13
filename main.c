@@ -6,12 +6,12 @@
  */
 int main(int ac, char **av)
 {
-    ssize_t n;
+    size_t buff = 500;
     if (ac != 2)
     {
-        dprintf(2, "Usage: %s filename\n", av[0]);
+        dprintf(2, "USAGE: monty file\n");
         exit(1);
     }
-    n = read_textfile(av[1], 1024);
+    read_textfile(av[1], buff);
     return (0);
 }
