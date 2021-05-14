@@ -5,11 +5,14 @@
  * @letters: number of characters.
  * Return: characters prints.
  */
+
 int read_textfile(const char *filename, size_t letters)
 {
-    int _open, _read, i = 0;
+    int _open, _read;
     char *ptr = NULL;
     char **tokens = NULL, **arg = NULL;
+    stack_t *head = NULL;
+    unsigned int line_number = 0, i = 0;
 
     if (filename == NULL)
     {
@@ -40,19 +43,16 @@ int read_textfile(const char *filename, size_t letters)
 
 	while (tokens[i] != NULL)
 	{
-        printf("%s tokens \n", tokens[i]);
 		arg = tock_2(tokens[i]);
-        valor = arg[1];
+        line_number = i + 1;
+        value = atoi(arg[1]);
+        funtions(arg[0], &head, line_number);
         if (arg == NULL)
         {
             perror ("No hay argumentos");
             i++;
             continue;
         }
-        /*if (arg != NULL)
-        {
-            printf("%s Seg token pos 0\n", arg[0]);
-        }*/
 		free_dpointer(arg);
 		i++;
 	}
@@ -109,7 +109,6 @@ int count_w(char *buff)
             words++;
         i++;
     }
-    printf("%d este es words\n", words);
     return (words);
 }
 
