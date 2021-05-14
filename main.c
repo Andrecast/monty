@@ -7,6 +7,7 @@
 int main(int ac, char **av)
 {
     size_t buff = 500;
+    printf("main");
     if (ac != 2)
     {
         dprintf(2, "USAGE: monty file\n");
