@@ -40,14 +40,19 @@ int read_textfile(const char *filename, size_t letters)
         exit(1);
     }
     tokens = tock_arg(ptr);
-
 	while (tokens[i] != NULL)
 	{
 		arg = tock_2(tokens[i]);
         line_number = i + 1;
-        value = atoi(arg[1]);
-        funtions(arg[0], &head, line_number);
-        if (arg == NULL)
+        if (arg != NULL)
+        {
+            if (arg[1] != NULL)
+            {
+                value = atoi(arg[1]);
+            }
+            funtions(arg[0], &head, line_number);
+        }
+        else
         {
             perror ("No hay argumentos");
             i++;
