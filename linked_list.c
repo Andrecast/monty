@@ -11,11 +11,11 @@ void _push(stack_t **stack, unsigned int line_number)
     stack_t *new;
 
     if (stack == NULL)/*si el doble puntero es NULL, no hay nada*/
-        return (NULL);
+        exit(1);
     new = malloc(sizeof(stack_t));
     /*verificar malloc**/
     if (new == NULL)
-        return (NULL);
+        exit(1);
     new->prev = NULL;/*le asigno NULL porq va a ser el nuevo nodo*/
     new->n = line_number;/*le asigno el número que va a llevar*/
 
@@ -26,15 +26,15 @@ void _push(stack_t **stack, unsigned int line_number)
         (*stack)->prev = new;/*Ahora new está al inicio de la lista*/
 
     *stack = new;
-    return (new);
 }
 /** pall -  prints all the values on the stack, starting from the top of the stack
  stack: pointer to the stack pointer of the list
  * @line_number: int at command input
  * Return: Nothing
  */
-void _pall(stack_t **stack, __attribute__((unused))unsigned int line_number)
+void _pall(stack_t **stack, unsigned int line_number)
 {
+	(void)line_number;
     stack_t *tmp = *stack;
 
     while (tmp !=   NULL)
@@ -47,9 +47,10 @@ void _pall(stack_t **stack, __attribute__((unused))unsigned int line_number)
 void _pint(stack_t **stack, unsigned int line_number)
 {
   stack_t *tmp;
-  
+  (void)line_number;
+
   if (*stack == NULL)
-    return (NULL);
+    exit(1);
   tmp = *stack;
   printf("%d\n", tmp->n);
 }
@@ -57,9 +58,10 @@ void _pint(stack_t **stack, unsigned int line_number)
 void _pop(stack_t **stack, unsigned int line_number)
 {
   stack_t *tmp;
-  
+  (void)line_number;
+
   if (*stack == NULL)
-    return (NULL);
+    exit(1);
   tmp = *stack;
   tmp = tmp->next;
   *stack = tmp;
@@ -69,11 +71,12 @@ void _pop(stack_t **stack, unsigned int line_number)
 /*intercambia los dos primeros elementos de la lista*/
 void _swap(stack_t **stack, unsigned int line_number)
 {
+  (void)line_number;
   int elements = 0;
   stack_t *tmp;
   
   if(*stack == NULL)
-    return ("error");
+    exit(1);
   elements++;
   tmp = *stack;
   while (tmp->next)
@@ -82,7 +85,7 @@ void _swap(stack_t **stack, unsigned int line_number)
     tmp = tmp->next;
   }
   if (elements < 2)
-    return ("error");
+    exit(1);
   elements = tmp->n;
   tmp->n = tmp->prev->n;
   tmp->prev->n = elements;
@@ -90,11 +93,12 @@ void _swap(stack_t **stack, unsigned int line_number)
 /**suma los dos primeros elementos y los pone en la segunda posición*/
 void _add(stack_t **stack, unsigned int line_number)
 {
+  (void)line_number;
   int elements = 0;
   stack_t *tmp;
   
   if(*stack == NULL)
-    return ("error");
+    exit(1);
   elements++;
   tmp = *stack;
   while (tmp->next)
@@ -103,7 +107,7 @@ void _add(stack_t **stack, unsigned int line_number)
     tmp = tmp->next;
   }
   if (elements < 2)
-    return ("error");
+    exit(1);
   tmp->prev->n = tmp->prev->n + tmp->n;
   _pop(stack, 0);
 }
