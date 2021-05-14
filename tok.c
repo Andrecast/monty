@@ -49,7 +49,6 @@ int count_2(char *buff, char *id)
         i++;
         token = strtok(NULL, id);
     }
-    printf("%d este es el numero de palabras\n", i);
     free(copy);
     return (i);
 }
