@@ -9,6 +9,7 @@
 void _push(stack_t **stack, unsigned int line_number)
 {
     stack_t *new;
+	(void)line_number;
 
     if (stack == NULL)/*si el doble puntero es NULL, no hay nada*/
         exit(1);
@@ -17,7 +18,7 @@ void _push(stack_t **stack, unsigned int line_number)
     if (new == NULL)
         exit(1);
     new->prev = NULL;/*le asigno NULL porq va a ser el nuevo nodo*/
-    new->n = line_number;/*le asigno el número que va a llevar*/
+    new->n = value;/*le asigno el número que va a llevar*/
 
     new->next = *stack;
 
