@@ -40,6 +40,7 @@ typedef struct instruction_s
 } instruction_t;
 
 int value;
+
 int read_textfile(const char *filename, size_t letters);
 char **tock_arg(char *buff_arg);
 int count_w(char *buff);
