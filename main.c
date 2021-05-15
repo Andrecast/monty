@@ -8,12 +8,14 @@
 int main(int ac, char **av)
 {
 	size_t letters = 500;
+    char *arguments = NULL;
 
 	if (ac != 2)
 	{
 		dprintf(2, "USAGE: monty file\n");
 		exit(1);
 	}
-	read_textfile(av[1], buff);
+	arguments = read_textfile(av[1], letters);
+    handle(arguments);
 	return (0);
 }
