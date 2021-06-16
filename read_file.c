@@ -13,26 +13,26 @@ char *read_textfile(const char *filename, size_t letters)
 
 	if (filename == NULL)
 	{
-		dprintf(STDERR_FILENO, "Error: Can't open file %s\n", filename);
+		printf("Error: Can't open file %s\n", filename);
 		exit(1);
 	}
 	ptr = malloc(sizeof(char) * letters);
 	if (ptr == NULL)
 	{
-		dprintf(STDERR_FILENO, "Error: malloc failed\n");
+		printf("Error: malloc failed\n");
 		exit(EXIT_FAILURE);
 	}
 	_open = open(filename, O_RDONLY);
 	if (_open == -1)
 	{
-		dprintf(STDERR_FILENO, "Error: Can't open file %s\n", filename);
+		printf("Error: Can't open file %s\n", filename);
 		free(ptr);
 		exit(EXIT_FAILURE);
 	}
 	_read = read(_open, ptr, letters);
 	if (_read == -1 || _read == 0)
 	{
-		dprintf(2, "Error: Can't open file %s\n", filename);
+		printf("Error: Can't open file %s\n", filename);
 		exit(EXIT_FAILURE);
 	}
 	close(_open);
