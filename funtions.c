@@ -32,7 +32,7 @@ void funtions(char *words, stack_t **stack, unsigned int line_number)
 
 	if (op[i].opcode == NULL)
 	{
-		dprintf(2, "L%d: unknown instruction %s\n", line_number, words);
+		printf("L%d: unknown instruction %s\n", line_number, words);
 		exit(EXIT_FAILURE);
 	}
 }
@@ -55,7 +55,7 @@ void _push(stack_t **stack, unsigned int line_number)
 	/*verificar malloc**/
 	if (new == NULL)
 	{
-		dprintf(STDERR_FILENO, "Error: malloc failed");
+		printf("Error: malloc failed");
 		exit(EXIT_FAILURE);
 	}
 	new->prev = NULL;/*le asigno NULL porq va a ser el nuevo nodo*/
@@ -74,12 +74,34 @@ void _push(stack_t **stack, unsigned int line_number)
  */
 void _pall(stack_t **stack, unsigned int line_number)
 {
-	(void)line_number;
 	stack_t *tmp = *stack;
+	(void)line_number;
 
 	while (tmp !=   NULL)
 	{
 		printf("%d\n", tmp->n);
 		tmp = tmp->next;
 	}
+}
+
+/**
+ * _strdup - Duplicate strings
+ * @src: string to be duplicated
+ * Return: Pointer to the address of the new copy
+ */
+char *_strdup(char *src)
+{
+	char *str = NULL, *p = NULL;
+	int len = 0;
+
+	while (src[len])
+	{
+		len++;
+	}
+	str = malloc(len + 1);
+	p = str;
+	while (*src)
+		*p++ = *src++;
+	*p = '\0';
+	return (str);
 }
