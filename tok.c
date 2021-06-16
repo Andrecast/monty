@@ -21,11 +21,11 @@ char **tock_2(char *buff_arg)
 		return (0);
 	}
 
-	arg_token[pos] = strdup(strtok(buff_arg, "\t "));
+	arg_token[pos] = _strdup(strtok(buff_arg, "\t "));
 	pos++;
 	while (pos < number_arg)
 	{
-		arg_token[pos] = strdup(strtok(NULL, "\t "));
+		arg_token[pos] = _strdup(strtok(NULL, "\t "));
 		pos++;
 	}
 	arg_token[pos] = NULL;
@@ -42,7 +42,7 @@ char **tock_2(char *buff_arg)
 int count_2(char *buff, char *id)
 {
 	int i = 0;
-	char *copy = strdup(buff);
+	char *copy = _strdup(buff);
 	char *token = NULL;
 
 	token = strtok(copy, id);
@@ -73,11 +73,11 @@ char **tock_arg(char *buff_arg)
 		return (NULL);
 	}
 
-	arg_token[pos] = strdup(strtok(buff_arg, "\n"));
+	arg_token[pos] = _strdup(strtok(buff_arg, "\n"));
 	pos++;
 	while (pos < number_arg)
 	{
-		arg_token[pos] = strdup(strtok(NULL, "\n"));
+		arg_token[pos] = _strdup(strtok(NULL, "\n"));
 		pos++;
 	}
 	arg_token[pos] = NULL;
