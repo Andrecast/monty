@@ -55,5 +55,6 @@ void _swap(stack_t **stack, unsigned int line_number);
 void _add(stack_t **stack, unsigned int line_number);
 int free_dpointer(char **pointer);
 int handle(char *ptr);
+char *_strdup(char *src);
 
 #endif
