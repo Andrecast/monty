@@ -43,9 +43,9 @@ void _pop(stack_t **stack, unsigned int line_number)
 
 void _swap(stack_t **stack, unsigned int line_number)
 {
-	(void)line_number;
 	int elements = 0;
 	stack_t *tmp;
+	(void)line_number;
 
 	if (*stack == NULL)
 		exit(EXIT_FAILURE);
@@ -70,9 +70,9 @@ void _swap(stack_t **stack, unsigned int line_number)
  */
 void _add(stack_t **stack, unsigned int line_number)
 {
-	(void)line_number;
 	int elements = 0;
 	stack_t *tmp;
+	(void)line_number;
 
 	if (*stack == NULL)
 		exit(EXIT_FAILURE);
